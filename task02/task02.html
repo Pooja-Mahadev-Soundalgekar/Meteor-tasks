@@ -1,0 +1,46 @@
+<head> 	
+<title>Locations!</title> 
+<script src="https://maps.googleapis.com/maps/api/js?key=KEY&signed_in=true&callback=initMap"
+        async defer></script>
+</head>
+
+<body>
+<div class="container">
+<header> 
+<h1>Locations!</h1>
+<img src="http://maps.googleapis.com/maps/api/staticmap?center={{loc.lat}},{{loc.lng}}&zoom=15&size=500x250&maptype=roadmap&markers=color:red%7C{{loc.lat}},{{loc.lng}}?key=KEY" />
+{{#if error}}
+    <p>Error: {{error.message}}</p>
+  {{/if}}
+<h2>You are currently at {{loc.lat}},{{loc.lng}} ! </h2>
+<form class="new-task">
+<input type="text" name="name" placeholder="Name" />
+<input type="text" name="lat" placeholder="Latitude" /> 
+<input type="text" name="lon" placeholder="Longitude" />
+<br>
+<br>
+<input type="submit" id="add" value="ADD">
+<input type="submit" id="calculate" value="Calculate Distance">
+</form> 
+</header>
+
+<ul> {{#each distances}} {{> distance}} {{/each}} </ul>
+<ul> {{#each tasks}} {{> task}} {{/each}} </ul> 
+</div>
+</body>
+
+<template name="distance">
+<li>
+<button class="delete2">&times;</button>
+<span class="text">{{name}} {{distance}}</span>
+</li>
+</template>
+
+
+<template name="task">
+<li class="{{#if checked}}checked{{/if}}"> 
+<button class="delete">&times;</button>
+
+<span class="text">{{name}} {{latitude}} {{longitude}}</span>
+</li>
+</template>
